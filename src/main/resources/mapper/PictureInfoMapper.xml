@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gome.dao.PictureInfoDao">
+	<resultMap id="BaseResultMap" type="com.gome.domain.PictureInfo">
+		<id column="PIC_ID" property="picId" jdbcType="VARCHAR" />
+		<result column="APP_NO" property="appNo" jdbcType="VARCHAR" />
+		<result column="IMG_NAME" property="imgName" jdbcType="VARCHAR" />
+		<result column="SAVE_NAME" property="saveName" jdbcType="VARCHAR" />
+		<result column="PAPER_TYPE" property="paperType" jdbcType="VARCHAR" />
+		<result column="SYS_NO" property="sysNo" jdbcType="VARCHAR" />
+		<result column="SYS_NAME" property="sysName" jdbcType="VARCHAR" />
+		<result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+		<result column="ID_TPYE" property="idTpye" jdbcType="VARCHAR" />
+		<result column="K_ID" property="kId" jdbcType="VARCHAR" />
+		<result column="PIC_FLAG" property="picFlag" jdbcType="VARCHAR" />
+		<result column="ORG_NO" property="orgNo" jdbcType="VARCHAR" />
+		<result column="BRANCH_ID" property="branchId" jdbcType="VARCHAR" />
+		<result column="IS_PATCH_BOLT" property="isPatchBolt" jdbcType="VARCHAR" />
+		<result column="IS_WASTE" property="isWaste" jdbcType="VARCHAR" />
+		<result column="IS_SMALL" property="isSmall" jdbcType="VARCHAR" />
+		<result column="SORT_NO" property="sortNo" jdbcType="BIGINT" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		PIC_ID, APP_NO, IMG_NAME, SAVE_NAME, PAPER_TYPE, SYS_NO, SYS_NAME, ID_NO,
+		ID_TPYE,
+		K_ID, PIC_FLAG, ORG_NO, BRANCH_ID, IS_PATCH_BOLT, IS_WASTE, IS_SMALL,
+		SORT_NO, REMARK,
+		CREATE_TIME, UPDATE_TIME
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from picture_info
+		where PIC_ID = #{picId,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="findPictureByAppNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from picture_info
+		where PIC_ID = #{appNo,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="findPictureByAppNoAndSaveName" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from picture_info
+		where APP_NO = #{appNo,jdbcType=VARCHAR}
+		and SAVE_NAME = #{saveName,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getPictureList" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from picture_info
+		where APP_NO = #{appNo,jdbcType=VARCHAR}
+		and SYS_NO = #{sysNo,jdbcType=VARCHAR}
+		and ITEM_NO = #{itemNo,jdbcType=VARCHAR}
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from picture_info
+		where PIC_ID = #{picId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.gome.domain.PictureInfo">
+		insert into picture_info (PIC_ID, APP_NO, IMG_NAME,
+		SAVE_NAME, PAPER_TYPE, SYS_NO,
+		SYS_NAME, ID_NO, ID_TPYE,
+		K_ID, PIC_FLAG, ORG_NO,
+		BRANCH_ID, IS_PATCH_BOLT, IS_WASTE,
+		IS_SMALL, SORT_NO, REMARK,
+		CREATE_TIME, UPDATE_TIME)
+		values (#{picId,jdbcType=VARCHAR}, #{appNo,jdbcType=VARCHAR},
+		#{imgName,jdbcType=VARCHAR},
+		#{saveName,jdbcType=VARCHAR}, #{paperType,jdbcType=VARCHAR}, #{sysNo,jdbcType=VARCHAR},
+		#{sysName,jdbcType=VARCHAR}, #{idNo,jdbcType=VARCHAR},
+		#{idTpye,jdbcType=VARCHAR},
+		#{kId,jdbcType=VARCHAR}, #{picFlag,jdbcType=VARCHAR}, #{orgNo,jdbcType=VARCHAR},
+		#{branchId,jdbcType=VARCHAR}, #{isPatchBolt,jdbcType=VARCHAR},
+		#{isWaste,jdbcType=VARCHAR},
+		#{isSmall,jdbcType=VARCHAR}, #{sortNo,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gome.domain.PictureInfo">
+		insert into picture_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="picId != null">
+				PIC_ID,
+			</if>
+			<if test="appNo != null">
+				APP_NO,
+			</if>
+			<if test="imgName != null">
+				IMG_NAME,
+			</if>
+			<if test="saveName != null">
+				SAVE_NAME,
+			</if>
+			<if test="paperType != null">
+				PAPER_TYPE,
+			</if>
+			<if test="sysNo != null">
+				SYS_NO,
+			</if>
+			<if test="sysName != null">
+				SYS_NAME,
+			</if>
+			<if test="idNo != null">
+				ID_NO,
+			</if>
+			<if test="idTpye != null">
+				ID_TPYE,
+			</if>
+			<if test="kId != null">
+				K_ID,
+			</if>
+			<if test="picFlag != null">
+				PIC_FLAG,
+			</if>
+			<if test="orgNo != null">
+				ORG_NO,
+			</if>
+			<if test="branchId != null">
+				BRANCH_ID,
+			</if>
+			<if test="isPatchBolt != null">
+				IS_PATCH_BOLT,
+			</if>
+			<if test="isWaste != null">
+				IS_WASTE,
+			</if>
+			<if test="isSmall != null">
+				IS_SMALL,
+			</if>
+			<if test="sortNo != null">
+				SORT_NO,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="picId != null">
+				#{picId,jdbcType=VARCHAR},
+			</if>
+			<if test="appNo != null">
+				#{appNo,jdbcType=VARCHAR},
+			</if>
+			<if test="imgName != null">
+				#{imgName,jdbcType=VARCHAR},
+			</if>
+			<if test="saveName != null">
+				#{saveName,jdbcType=VARCHAR},
+			</if>
+			<if test="paperType != null">
+				#{paperType,jdbcType=VARCHAR},
+			</if>
+			<if test="sysNo != null">
+				#{sysNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sysName != null">
+				#{sysName,jdbcType=VARCHAR},
+			</if>
+			<if test="idNo != null">
+				#{idNo,jdbcType=VARCHAR},
+			</if>
+			<if test="idTpye != null">
+				#{idTpye,jdbcType=VARCHAR},
+			</if>
+			<if test="kId != null">
+				#{kId,jdbcType=VARCHAR},
+			</if>
+			<if test="picFlag != null">
+				#{picFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="orgNo != null">
+				#{orgNo,jdbcType=VARCHAR},
+			</if>
+			<if test="branchId != null">
+				#{branchId,jdbcType=VARCHAR},
+			</if>
+			<if test="isPatchBolt != null">
+				#{isPatchBolt,jdbcType=VARCHAR},
+			</if>
+			<if test="isWaste != null">
+				#{isWaste,jdbcType=VARCHAR},
+			</if>
+			<if test="isSmall != null">
+				#{isSmall,jdbcType=VARCHAR},
+			</if>
+			<if test="sortNo != null">
+				#{sortNo,jdbcType=BIGINT},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gome.domain.PictureInfo">
+		update picture_info
+		<set>
+			<if test="appNo != null">
+				APP_NO = #{appNo,jdbcType=VARCHAR},
+			</if>
+			<if test="imgName != null">
+				IMG_NAME = #{imgName,jdbcType=VARCHAR},
+			</if>
+			<if test="saveName != null">
+				SAVE_NAME = #{saveName,jdbcType=VARCHAR},
+			</if>
+			<if test="paperType != null">
+				PAPER_TYPE = #{paperType,jdbcType=VARCHAR},
+			</if>
+			<if test="sysNo != null">
+				SYS_NO = #{sysNo,jdbcType=VARCHAR},
+			</if>
+			<if test="sysName != null">
+				SYS_NAME = #{sysName,jdbcType=VARCHAR},
+			</if>
+			<if test="idNo != null">
+				ID_NO = #{idNo,jdbcType=VARCHAR},
+			</if>
+			<if test="idTpye != null">
+				ID_TPYE = #{idTpye,jdbcType=VARCHAR},
+			</if>
+			<if test="kId != null">
+				K_ID = #{kId,jdbcType=VARCHAR},
+			</if>
+			<if test="picFlag != null">
+				PIC_FLAG = #{picFlag,jdbcType=VARCHAR},
+			</if>
+			<if test="orgNo != null">
+				ORG_NO = #{orgNo,jdbcType=VARCHAR},
+			</if>
+			<if test="branchId != null">
+				BRANCH_ID = #{branchId,jdbcType=VARCHAR},
+			</if>
+			<if test="isPatchBolt != null">
+				IS_PATCH_BOLT = #{isPatchBolt,jdbcType=VARCHAR},
+			</if>
+			<if test="isWaste != null">
+				IS_WASTE = #{isWaste,jdbcType=VARCHAR},
+			</if>
+			<if test="isSmall != null">
+				IS_SMALL = #{isSmall,jdbcType=VARCHAR},
+			</if>
+			<if test="sortNo != null">
+				SORT_NO = #{sortNo,jdbcType=BIGINT},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where PIC_ID = #{picId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gome.domain.PictureInfo">
+		update picture_info
+		set APP_NO = #{appNo,jdbcType=VARCHAR},
+		IMG_NAME = #{imgName,jdbcType=VARCHAR},
+		SAVE_NAME = #{saveName,jdbcType=VARCHAR},
+		PAPER_TYPE = #{paperType,jdbcType=VARCHAR},
+		SYS_NO = #{sysNo,jdbcType=VARCHAR},
+		SYS_NAME = #{sysName,jdbcType=VARCHAR},
+		ID_NO = #{idNo,jdbcType=VARCHAR},
+		ID_TPYE = #{idTpye,jdbcType=VARCHAR},
+		K_ID = #{kId,jdbcType=VARCHAR},
+		PIC_FLAG = #{picFlag,jdbcType=VARCHAR},
+		ORG_NO = #{orgNo,jdbcType=VARCHAR},
+		BRANCH_ID = #{branchId,jdbcType=VARCHAR},
+		IS_PATCH_BOLT = #{isPatchBolt,jdbcType=VARCHAR},
+		IS_WASTE = #{isWaste,jdbcType=VARCHAR},
+		IS_SMALL = #{isSmall,jdbcType=VARCHAR},
+		SORT_NO = #{sortNo,jdbcType=BIGINT},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+		where PIC_ID = #{picId,jdbcType=VARCHAR}
+	</update>
+</mapper>

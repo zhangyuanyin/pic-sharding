@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gome.dao.OrgInfoDao">
+	<resultMap id="BaseResultMap" type="com.gome.domain.OrgInfo">
+		<id column="ORG_NO" property="orgNo" jdbcType="VARCHAR" />
+		<result column="BRANCH_NO" property="branchNo" jdbcType="VARCHAR" />
+		<result column="SUPER_NO" property="superNo" jdbcType="VARCHAR" />
+		<result column="BRANCH_CLASS" property="branchClass" jdbcType="VARCHAR" />
+		<result column="BRANCH_PHONE" property="branchPhone" jdbcType="VARCHAR" />
+		<result column="BRANCH_CITY" property="branchCity" jdbcType="VARCHAR" />
+		<result column="BRANCH_ADDR" property="branchAddr" jdbcType="VARCHAR" />
+		<result column="BRANCH_DISC" property="branchDisc" jdbcType="VARCHAR" />
+		<result column="TREE_ID" property="treeId" jdbcType="BIGINT" />
+		<result column="TREE_PID" property="treePid" jdbcType="BIGINT" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ORG_NO, BRANCH_NO, SUPER_NO, BRANCH_CLASS, BRANCH_PHONE, BRANCH_CITY,
+		BRANCH_ADDR,
+		BRANCH_DISC, TREE_ID, TREE_PID, CREATE_TIME, UPDATE_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from org_info
+		where ORG_NO = #{orgNo,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from org_info
+		where ORG_NO = #{orgNo,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.gome.domain.OrgInfo">
+		insert into org_info (ORG_NO, BRANCH_NO, SUPER_NO,
+		BRANCH_CLASS, BRANCH_PHONE, BRANCH_CITY,
+		BRANCH_ADDR, BRANCH_DISC, TREE_ID,
+		TREE_PID, CREATE_TIME, UPDATE_TIME
+		)
+		values (#{orgNo,jdbcType=VARCHAR}, #{branchNo,jdbcType=VARCHAR},
+		#{superNo,jdbcType=VARCHAR},
+		#{branchClass,jdbcType=VARCHAR}, #{branchPhone,jdbcType=VARCHAR}, #{branchCity,jdbcType=VARCHAR},
+		#{branchAddr,jdbcType=VARCHAR}, #{branchDisc,jdbcType=VARCHAR},
+		#{treeId,jdbcType=BIGINT},
+		#{treePid,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.gome.domain.OrgInfo">
+		insert into org_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orgNo != null">
+				ORG_NO,
+			</if>
+			<if test="branchNo != null">
+				BRANCH_NO,
+			</if>
+			<if test="superNo != null">
+				SUPER_NO,
+			</if>
+			<if test="branchClass != null">
+				BRANCH_CLASS,
+			</if>
+			<if test="branchPhone != null">
+				BRANCH_PHONE,
+			</if>
+			<if test="branchCity != null">
+				BRANCH_CITY,
+			</if>
+			<if test="branchAddr != null">
+				BRANCH_ADDR,
+			</if>
+			<if test="branchDisc != null">
+				BRANCH_DISC,
+			</if>
+			<if test="treeId != null">
+				TREE_ID,
+			</if>
+			<if test="treePid != null">
+				TREE_PID,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orgNo != null">
+				#{orgNo,jdbcType=VARCHAR},
+			</if>
+			<if test="branchNo != null">
+				#{branchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="superNo != null">
+				#{superNo,jdbcType=VARCHAR},
+			</if>
+			<if test="branchClass != null">
+				#{branchClass,jdbcType=VARCHAR},
+			</if>
+			<if test="branchPhone != null">
+				#{branchPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="branchCity != null">
+				#{branchCity,jdbcType=VARCHAR},
+			</if>
+			<if test="branchAddr != null">
+				#{branchAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="branchDisc != null">
+				#{branchDisc,jdbcType=VARCHAR},
+			</if>
+			<if test="treeId != null">
+				#{treeId,jdbcType=BIGINT},
+			</if>
+			<if test="treePid != null">
+				#{treePid,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gome.domain.OrgInfo">
+		update org_info
+		<set>
+			<if test="branchNo != null">
+				BRANCH_NO = #{branchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="superNo != null">
+				SUPER_NO = #{superNo,jdbcType=VARCHAR},
+			</if>
+			<if test="branchClass != null">
+				BRANCH_CLASS = #{branchClass,jdbcType=VARCHAR},
+			</if>
+			<if test="branchPhone != null">
+				BRANCH_PHONE = #{branchPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="branchCity != null">
+				BRANCH_CITY = #{branchCity,jdbcType=VARCHAR},
+			</if>
+			<if test="branchAddr != null">
+				BRANCH_ADDR = #{branchAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="branchDisc != null">
+				BRANCH_DISC = #{branchDisc,jdbcType=VARCHAR},
+			</if>
+			<if test="treeId != null">
+				TREE_ID = #{treeId,jdbcType=BIGINT},
+			</if>
+			<if test="treePid != null">
+				TREE_PID = #{treePid,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ORG_NO = #{orgNo,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gome.domain.OrgInfo">
+		update org_info
+		set BRANCH_NO = #{branchNo,jdbcType=VARCHAR},
+		SUPER_NO = #{superNo,jdbcType=VARCHAR},
+		BRANCH_CLASS = #{branchClass,jdbcType=VARCHAR},
+		BRANCH_PHONE = #{branchPhone,jdbcType=VARCHAR},
+		BRANCH_CITY = #{branchCity,jdbcType=VARCHAR},
+		BRANCH_ADDR = #{branchAddr,jdbcType=VARCHAR},
+		BRANCH_DISC = #{branchDisc,jdbcType=VARCHAR},
+		TREE_ID = #{treeId,jdbcType=BIGINT},
+		TREE_PID = #{treePid,jdbcType=BIGINT},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+		where ORG_NO = #{orgNo,jdbcType=VARCHAR}
+	</update>
+</mapper>

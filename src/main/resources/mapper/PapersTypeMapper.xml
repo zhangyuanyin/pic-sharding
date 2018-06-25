@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gome.dao.PapersTypeDao">
+	<resultMap id="BaseResultMap" type="com.gome.domain.PapersType">
+		<id column="ITEM_CODE" property="itemCode" jdbcType="VARCHAR" />
+		<id column="SYS_NO" property="sysNo" jdbcType="VARCHAR" />
+		<result column="ITEM_VALUE" property="itemValue" jdbcType="VARCHAR" />
+		<result column="ORG_NO" property="orgNo" jdbcType="VARCHAR" />
+		<result column="BRANCH_ID" property="branchId" jdbcType="VARCHAR" />
+		<result column="SYS_NAME" property="sysName" jdbcType="VARCHAR" />
+		<result column="SORT_NO" property="sortNo" jdbcType="VARCHAR" />
+		<result column="GRADE" property="grade" jdbcType="INTEGER" />
+		<result column="STATUS" property="status" jdbcType="CHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ITEM_CODE, SYS_NO, ITEM_VALUE, ORG_NO, BRANCH_ID, SYS_NAME, SORT_NO, GRADE,
+		STATUS
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.gome.domain.PapersTypeKey">
+		select
+		<include refid="Base_Column_List" />
+		from papers_type
+		where ITEM_CODE = #{itemCode,jdbcType=VARCHAR}
+		and SYS_NO = #{sysNo,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="findPapersTypeBySysNo" resultMap="BaseResultMap" parameterType="com.gome.domain.PapersTypeKey">
+		select
+		<include refid="Base_Column_List" />
+		from papers_type
+		where SYS_NO = #{sysNo,jdbcType=VARCHAR}
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="com.gome.domain.PapersTypeKey">
+		delete from papers_type
+		where ITEM_CODE = #{itemCode,jdbcType=VARCHAR}
+		and SYS_NO = #{sysNo,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.gome.domain.PapersType">
+		insert into papers_type (ITEM_CODE, SYS_NO, ITEM_VALUE,
+		ORG_NO, BRANCH_ID, SYS_NAME,
+		SORT_NO, GRADE, STATUS)
+		values (#{itemCode,jdbcType=VARCHAR}, #{sysNo,jdbcType=VARCHAR},
+		#{itemValue,jdbcType=VARCHAR},
+		#{orgNo,jdbcType=VARCHAR}, #{branchId,jdbcType=VARCHAR}, #{sysName,jdbcType=VARCHAR},
+		#{sortNo,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER},
+		#{status,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gome.domain.PapersType">
+		insert into papers_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="itemCode != null">
+				ITEM_CODE,
+			</if>
+			<if test="sysNo != null">
+				SYS_NO,
+			</if>
+			<if test="itemValue != null">
+				ITEM_VALUE,
+			</if>
+			<if test="orgNo != null">
+				ORG_NO,
+			</if>
+			<if test="branchId != null">
+				BRANCH_ID,
+			</if>
+			<if test="sysName != null">
+				SYS_NAME,
+			</if>
+			<if test="sortNo != null">
+				SORT_NO,
+			</if>
+			<if test="grade != null">
+				GRADE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="itemCode != null">
+				#{itemCode,jdbcType=VARCHAR},
+			</if>
+			<if test="sysNo != null">
+				#{sysNo,jdbcType=VARCHAR},
+			</if>
+			<if test="itemValue != null">
+				#{itemValue,jdbcType=VARCHAR},
+			</if>
+			<if test="orgNo != null">
+				#{orgNo,jdbcType=VARCHAR},
+			</if>
+			<if test="branchId != null">
+				#{branchId,jdbcType=VARCHAR},
+			</if>
+			<if test="sysName != null">
+				#{sysName,jdbcType=VARCHAR},
+			</if>
+			<if test="sortNo != null">
+				#{sortNo,jdbcType=VARCHAR},
+			</if>
+			<if test="grade != null">
+				#{grade,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gome.domain.PapersType">
+		update papers_type
+		<set>
+			<if test="itemValue != null">
+				ITEM_VALUE = #{itemValue,jdbcType=VARCHAR},
+			</if>
+			<if test="orgNo != null">
+				ORG_NO = #{orgNo,jdbcType=VARCHAR},
+			</if>
+			<if test="branchId != null">
+				BRANCH_ID = #{branchId,jdbcType=VARCHAR},
+			</if>
+			<if test="sysName != null">
+				SYS_NAME = #{sysName,jdbcType=VARCHAR},
+			</if>
+			<if test="sortNo != null">
+				SORT_NO = #{sortNo,jdbcType=VARCHAR},
+			</if>
+			<if test="grade != null">
+				GRADE = #{grade,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=CHAR},
+			</if>
+		</set>
+		where ITEM_CODE = #{itemCode,jdbcType=VARCHAR}
+		and SYS_NO = #{sysNo,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gome.domain.PapersType">
+		update papers_type
+		set ITEM_VALUE = #{itemValue,jdbcType=VARCHAR},
+		ORG_NO = #{orgNo,jdbcType=VARCHAR},
+		BRANCH_ID = #{branchId,jdbcType=VARCHAR},
+		SYS_NAME = #{sysName,jdbcType=VARCHAR},
+		SORT_NO = #{sortNo,jdbcType=VARCHAR},
+		GRADE = #{grade,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=CHAR}
+		where ITEM_CODE = #{itemCode,jdbcType=VARCHAR}
+		and SYS_NO = #{sysNo,jdbcType=VARCHAR}
+	</update>
+</mapper>
